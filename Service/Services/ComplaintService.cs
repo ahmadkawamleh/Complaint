@@ -37,9 +37,9 @@ namespace Service.Services
             return _mapper.Map<ComplaintDTO>(result);
         }
 
-        public async Task<List<ComplaintDTO>> GetAllAsync(int pageNumber, int pageSize, string userId, CancellationToken cancellationToken)
+        public async Task<List<ComplaintDTO>> GetAllAsync(int pageNumber, int pageSize, string userId, bool isAdmin, CancellationToken cancellationToken)
         {
-            var result = await _complaintRepository.GetAllComplaint(pageNumber, pageSize, userId,cancellationToken);
+            var result = await _complaintRepository.GetAllComplaint(pageNumber, pageSize, userId, isAdmin, cancellationToken);
             return _mapper.Map<List<ComplaintDTO>>(result);
         }
 

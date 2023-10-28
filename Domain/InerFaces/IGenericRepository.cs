@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using System.Linq.Expressions;
 
 namespace Domain
 {
@@ -7,7 +8,7 @@ namespace Domain
         void Add(TEntity entity);
         Task Delete(int id, CancellationToken cancellationToken);
         Task<TEntity> FindById(int id, string UserId, List<string> includes, CancellationToken cancellationToken);
-        Task<List<TEntity>> GetAll(int pageNumber, int pageSize, string UserId, List<string> includes, CancellationToken cancellationToken);
+        Task<List<TEntity>> GetAll(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> filter, List<string> includes, CancellationToken cancellationToken);
         void Update(TEntity entity);
     }
 }

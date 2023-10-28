@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,9 +22,10 @@ namespace Infrastructure
         {
             return await base.FindById(id, userId, includes, cancellationToken);
         }
-        public async Task<List<Complaint>> GetAllComplaint(int pageNumber, int pageSize, string userId, CancellationToken cancellationToken)
+        public async Task<List<Complaint>> GetAllComplaint(int pageNumber, int pageSize, string userId, bool isAdmin, CancellationToken cancellationToken)
         {
-            return await base.GetAll(pageNumber, pageSize, userId, includes, cancellationToken);
+            Expression<Func<Complaint, bool>> filter = x => isAdmin || x.UserId == userId;
+            return await base.GetAll(pageNumber, pageSize, filter, includes, cancellationToken);
         }
     }
 }

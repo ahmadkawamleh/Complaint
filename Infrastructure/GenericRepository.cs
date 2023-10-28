@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,10 +45,10 @@ namespace Infrastructure
             return await query.SingleOrDefaultAsync(cancellationToken);
         }
 
-        public async Task<List<TEntity>> GetAll(int pageNumber, int pageSize, string userId, List<string> includes, CancellationToken cancellationToken)
+        public async Task<List<TEntity>> GetAll(int pageNumber, int pageSize, Expression<Func<TEntity, bool>> filter,  List<string> includes, CancellationToken cancellationToken)
         {
             var query = _dbSet
-                .Where(x=> x.UserId == userId)
+                .Where(filter)
                 .OrderByDescending(x => x.CreationDate)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);
@@ -57,6 +58,7 @@ namespace Infrastructure
                 {
                     query = query.Include(include);
                 }
+
             return await query.ToListAsync(cancellationToken);
         }
 

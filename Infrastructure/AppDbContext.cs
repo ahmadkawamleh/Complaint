@@ -25,8 +25,36 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole("admin"), new IdentityRole("user"));
-            modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser("AdminUser") { PasswordHash= "fd4fb3735df3f485a73ea6900668e30598fc31d1a6a5ef2b19803fee407b7f7f",Email= "AdminUser@admin.com", NormalizedUserName= "ADMINUSER" });
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole("admin")
+                {
+                    Id = "78ca9c03-4b50-4935-874e-d93fae9f7c4e",
+                    NormalizedName = "ADMIN"
+                },
+                new IdentityRole("user")
+                {
+                    Id = "d42b4f89-4216-4f43-9fc0-7037efb191f1",
+                    NormalizedName = "USER"
+                }
+                );
+
+            modelBuilder.Entity<IdentityUser>().HasData(
+                new IdentityUser("Admin")
+                {
+                    Id = "c1bbd3af-2601-42d1-a2c6-542b473b01e4",
+                    PasswordHash = "AQAAAAEAACcQAAAAEPaBlw2dbcjmOyJCHCYPb4TfmHmwGlNq2IOq9rsmresca3M0eIhLIZYyCy8SNqx2+w==", //pasword: 123456
+                    Email = "Admin@admin.com",
+                    NormalizedUserName = "ADMIN"
+                }
+            );
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>()
+                {
+                    UserId = "c1bbd3af-2601-42d1-a2c6-542b473b01e4",
+                    RoleId = "78ca9c03-4b50-4935-874e-d93fae9f7c4e"
+                }
+                );
         }
         #endregion
     }
