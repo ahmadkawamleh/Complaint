@@ -5,7 +5,7 @@
 /.vs
 *.suo
 *.user
-**/bin/*
-**/obj/*
+[Bb]in/
+[Oo]bj/
 packages
 /Presentation/Uploads
