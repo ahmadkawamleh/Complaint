@@ -47,11 +47,5 @@ namespace Presentation.Controllers
             string userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return Ok(await _complaintService.Create(complaintDTO, cancellationToken));
         }
-
-        [HttpPost("UploadFiles")]
-        public async Task<IActionResult> UploadFiles()
-        {
-            
-        }
     }
 }
