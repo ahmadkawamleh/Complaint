@@ -3,6 +3,9 @@
 ################################################################################
 
 /.vs
-obj/
-bin/
-/Infrastructure/bin/Debug/net6.0/Infrastructure.dll
+*.suo
+*.user
+bin
+obj
+packages
+/Presentation/Uploads
